@@ -52,8 +52,8 @@ static	char	**ft_main(char const *s, char c, char **mal, int counts)
 		next_str += len;
 		i++;
 	}
-	if (i != 1)
-		mal[i - 1] = NULL;
+	if (!mal[i - 1] || i > 2)
+		mal[i - 1] = 0;
 	return (mal);
 }
 
