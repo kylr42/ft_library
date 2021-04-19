@@ -30,9 +30,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!s1)
 		return (NULL);
 	begin = ft_ltrim(s1, set, 0);
+	if (!s1[begin])
+		return (ft_substr(s1, begin, 1));
 	end = ft_rtrim(s1, set, ft_strlen(s1) - 1) - begin;
-	if (end <= 0)
-		return ("");
-	else
-		return (ft_substr(s1, begin, end + 1));
+	return (ft_substr(s1, begin, end + 1));
 }

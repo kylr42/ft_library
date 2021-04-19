@@ -1,7 +1,6 @@
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -c
-NAME = libft
-LIB = ${NAME}.a
+NAME = libft.a
 
 SRCS =	ft_memset.c ft_bzero.c \
 		ft_memcpy.c ft_memccpy.c \
@@ -29,24 +28,24 @@ OBJS = ${SRCS:.c=.o}
 BONUS_OBJS = ${BONUS:.c=.o}
 DEPS = libft.h
 
-all: ${LIB}
+all: ${NAME}
 
 .c.o: ${DEPS}
 	${CC} ${FLAGS} $< -o $@
 
-${LIB}: ${OBJS}
-	ar -rc ${LIB} ${OBJS}
-	ranlib ${LIB}
+${NAME}: ${OBJS}
+	ar -rc ${NAME} ${OBJS}
+	ranlib ${NAME}
 
 bonus: ${OBJS} ${BONUS_OBJS}
-	ar -rc ${LIB} ${OBJS} ${BONUS_OBJS}
-	ranlib ${LIB}
+	ar -rc ${NAME} ${OBJS} ${BONUS_OBJS}
+	ranlib ${NAME}
 
 clean:
 		rm -f $(OBJS) ${BONUS:.c=.o}
 
 fclean: clean
-		rm -f ${LIB} ${NAME}
+		rm -f ${NAME}
 
 re: fclean all
 
