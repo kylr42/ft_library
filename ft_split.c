@@ -26,13 +26,13 @@ static	char	**ft_main(char const *s, char c, char **mal, int counts)
 {
 	int		i;
 	int		len;
-	int 	next;
+	int		next;
 
 	i = 0;
 	next = 0;
 	while (i < counts)
 	{
-		while (s[next] == c)
+		while (s[next] && s[next] == c)
 			next++;
 		len = ft_ellen(&(s[next]), c, 0);
 		if (!len)
@@ -41,18 +41,19 @@ static	char	**ft_main(char const *s, char c, char **mal, int counts)
 		if (!&mal[i])
 			return (ft_free_mal(mal));
 		next += len;
+		if (!s[next])
+			break ;
 		i++;
 	}
-	mal[i] = 0;
 	return (mal);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int 	j;
+	int		j;
 	char	**mal;
 	int		counts;
-	int 	flag;
+	int		flag;
 
 	if (!s)
 		return (NULL);
@@ -66,8 +67,7 @@ char	**ft_split(char const *s, char c)
 			counts++;
 		j++;
 	}
-
-	mal = (char **)malloc(sizeof(char *) * counts + 1);
+	mal = ft_calloc(counts + 1, sizeof(char *));
 	if (!mal)
 		return (NULL);
 	if (!flag)
