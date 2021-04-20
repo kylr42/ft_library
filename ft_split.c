@@ -1,4 +1,5 @@
 #include "libft.h"
+#include <stdio.h>
 
 static	char	**ft_free_mal(char **list)
 {
@@ -14,20 +15,9 @@ static	char	**ft_free_mal(char **list)
 	return (NULL);
 }
 
-static	int	ft_counts_el(char const *s, char c, int	i, int	j)
-{
-	while (s[j + 1])
-	{
-		if (s[j] == c && s[j + 1] != c)
-			i++;
-		j++;
-	}
-	return (i + 1);
-}
-
 static	int	ft_ellen(char const *s, char c, int i)
 {
-	while (s[i] != c)
+	while (s[i] && s[i] != c)
 		i++;
 	return (i);
 }
@@ -36,37 +26,51 @@ static	char	**ft_main(char const *s, char c, char **mal, int counts)
 {
 	int		i;
 	int		len;
-	char	*next_str;
+	int 	next;
 
 	i = 0;
-	next_str = (char *)s;
+	next = 0;
 	while (i < counts)
 	{
-		while (*next_str == c)
-			next_str++;
-		len = ft_ellen(next_str, c, 0);
-		mal[i] = (char *)malloc(sizeof(char) * len);
-		if (!mal[i])
+		while (s[next] == c)
+			next++;
+		len = ft_ellen(&(s[next]), c, 0);
+		if (!len)
+			break ;
+		mal[i] = ft_substr(s, next, len);
+		if (!&mal[i])
 			return (ft_free_mal(mal));
-		ft_strlcpy(mal[i], next_str, len + 1);
-		next_str += len;
+		next += len;
 		i++;
 	}
-	if (!mal[i - 1] || i > 2)
-		mal[i - 1] = 0;
+	mal[i] = 0;
 	return (mal);
 }
 
 char	**ft_split(char const *s, char c)
 {
+	int 	j;
 	char	**mal;
 	int		counts;
+	int 	flag;
 
 	if (!s)
 		return (NULL);
-	counts = ft_counts_el(s, c, 0, 0);
+	j = 0;
+	counts = 1;
+	while (s[j] && s[j + 1])
+	{
+		if (s[j] != c || s[j + 1] != c)
+			flag = 1;
+		if (s[j] == c && s[j + 1] != c)
+			counts++;
+		j++;
+	}
+
 	mal = (char **)malloc(sizeof(char *) * counts + 1);
 	if (!mal)
 		return (NULL);
+	if (!flag)
+		return (ft_main(s, c, mal, counts - 1));
 	return (ft_main(s, c, mal, counts));
 }
