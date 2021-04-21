@@ -6,7 +6,7 @@
 #    By: jsiona <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 12:32:54 by jsiona            #+#    #+#              #
-#    Updated: 2021/04/20 12:32:57 by jsiona           ###   ########.fr        #
+#    Updated: 2021/04/21 20:30:50 by jsiona           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ all: ${NAME}
 .c.o: ${DEPS}
 	${CC} ${FLAGS} $< -o $@
 
-${NAME}: ${OBJS}
+${NAME}: ${OBJS} ${DEPS}
 	ar -rc ${NAME} ${OBJS}
 	ranlib ${NAME}
 
