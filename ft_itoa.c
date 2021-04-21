@@ -26,7 +26,7 @@ char	*ft_itoa(int n)
 {
 	int		i;
 	long	num;
-	char	list[2048];
+	char	list[13];
 
 	i = 0;
 	num = (long) n;
