@@ -1,5 +1,4 @@
 #include "libft.h"
-#include <stdio.h>
 
 static	char	**ft_free_mal(char **list)
 {

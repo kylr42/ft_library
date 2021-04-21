@@ -1,11 +1,11 @@
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+size_t	ft_lstsize(t_list *lst)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	while (lst && ++i)
 		lst = lst->next;
-	return (i - 1);
+	return (i);
 }
