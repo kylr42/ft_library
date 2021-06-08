@@ -8,14 +8,11 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		return (NULL);
 	new_list = ft_lstnew(f(lst->content));
 	if (!new_list)
-	{
-		ft_lstclear(&new_list, del);
-		return (new_list);
-	}
+		return (ft_lstclear(new_list));
 	lst = lst->next;
 	while (lst)
 	{
-		ft_lstadd_front(&new_list, ft_lstnew(f(lst->content)));
+		ft_lstadd_back(&new_list, ft_lstnew(f(lst->content)));
 		if (!new_list)
 		{
 			ft_lstclear(&new_list, del);
