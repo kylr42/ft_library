@@ -6,12 +6,12 @@
 #    By: jsiona <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 12:32:54 by jsiona            #+#    #+#              #
-#    Updated: 2021/04/21 20:30:50 by jsiona           ###   ########.fr        #
+#    Updated: 2021/05/18 03:26:28 by jsiona           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -c
+FLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 
 SRCS =	ft_atoi.c ft_bzero.c \
@@ -42,9 +42,6 @@ DEPS = libft.h
 
 all: ${NAME}
 
-.c.o: ${DEPS}
-	${CC} ${FLAGS} $< -o $@
-
 ${NAME}: ${OBJS} ${DEPS}
 	ar -rc ${NAME} ${OBJS}
 	ranlib ${NAME}
@@ -54,10 +51,10 @@ bonus: ${OBJS} ${BONUS_OBJS}
 	ranlib ${NAME}
 
 clean:
-		rm -f $(OBJS) ${BONUS:.c=.o}
+	rm -f $(OBJS) ${BONUS:.c=.o}
 
 fclean: clean
-		rm -f ${NAME}
+	rm -f ${NAME}
 
 re: fclean all
 
